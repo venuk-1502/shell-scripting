@@ -20,7 +20,7 @@ sed -e "s/DNS_NAME/$1.knowaws.com/" -e "s/IP_ADDRESS/${ip_address}/" change-reso
 aws route53 change-resource-record-sets --hosted-zone-id Z00216652JEVANUOGF0R3 --change-batch file:///tmp/change-resource-record-sets.json | jq >> /dev/null
 if [ $? -eq 0 ]; then
   echo "Successfully created DNS name for new instance: $1.knowaws.com"
-else:
+else
   echo "Route53 DNS record creation failed."
 fi
 #--launch-specification file://specification.json
