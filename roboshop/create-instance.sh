@@ -4,7 +4,7 @@
 #--tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=$1}]'
 #sed -s ""
 instance_count=$(aws ec2 describe-instances --filters  "Name=tag:Name,Values=$1" | jq ".Reservations[].Instances[].PrivateIpAddress" | grep -v null  | wc -l)
-if [ instance_count -ne 0 ];
+if [ instance_count -ne 0 ]; then
   request_id=$(aws ec2 request-spot-instances --spot-price "0.0036" --instance-count 1 --type "persistent" --launch-specification file://specification.json | jq -r ".SpotInstanceRequests[].SpotInstanceRequestId")
   echo "SPOT Instance Request Created: $request_id"
 else
