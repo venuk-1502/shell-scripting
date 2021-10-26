@@ -10,7 +10,7 @@ fi
 echo "Sleeping for 1 minute for instance to be created"
 sleep 30
 
-instance_id=$(aws ec2 describe-spot-instance-requests --query "SpotInstanceRequests[?SpotInstanceRequestId=='${request_id}'].InstanceId|[0]")
+instance_id=$(aws ec2 describe-spot-instance-requests --query "SpotInstanceRequests[?SpotInstanceRequestId=='${request_id}'].InstanceId|[0]"|xargs)
 echo "SPOT Instance Has Been Created: $instance_id"
 
 aws ec2 create-tags --resources $request_id $instance_id --tags Key=Name,Value=$1
