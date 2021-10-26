@@ -18,7 +18,7 @@ echo "SPOT Instance Has Been Created: $instance_id"
 ip_address=$(aws ec2 describe-instances --filters  "Name=tag:Name,Values=$1" | jq ".Reservations[].Instances[].PrivateIpAddress" | grep -v null|xargs)
 
 sed -e "s/DNS_NAME/$1.knowaws.com/" -e "s/IP_ADDRESS/${ip_address}/" change-resource-record-sets.json > /tmp/change-resource-record-sets.json
-aws route53 change-resource-record-sets --hosted-zone-id Z00216652JEVANUOGF0R3 --change-batch file:///tmp/change-resource-record-sets.json
+aws route53 change-resource-record-sets --hosted-zone-id Z00216652JEVANUOGF0R3 --change-batch file:///tmp/change-resource-record-sets.json | jq
 
 #--launch-specification file://specification.json
 
