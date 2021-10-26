@@ -4,8 +4,8 @@ instance_count=$(aws ec2 describe-instances --filters  "Name=tag:Name,Values=$1"
 if [ $instance_count -eq 0 ]; then
   request_id=$(aws ec2 request-spot-instances --spot-price "0.0036" --instance-count 1 --type "persistent" --launch-specification file://specification.json | jq -r ".SpotInstanceRequests[].SpotInstanceRequestId")
   echo "SPOT Instance Request Created: $request_id"
-  echo "Sleeping for 1 minute for instance to be created"
-  sleep 30
+  echo "Sleeping 1 minute for instance to be created"
+  sleep 60
   instance_id=$(aws ec2 describe-spot-instance-requests --query "SpotInstanceRequests[?SpotInstanceRequestId=='${request_id}'].InstanceId|[0]"|xargs)
   echo "SPOT Instance Has Been Created: $instance_id"
 
@@ -22,6 +22,7 @@ if [ $? -eq 0 ]; then
   echo "Successfully created DNS name for new instance: $1.knowaws.com"
 else:
   echo "Route53 DNS record creation failed."
+fi
 #--launch-specification file://specification.json
 
 #--tag-specifications 'ResourceType=spot-instances-request,Tags=[{Key=Name,Value=$1}]'
