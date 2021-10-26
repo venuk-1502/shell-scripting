@@ -1,0 +1,18 @@
+{
+  "Comment": "update record for new instances based on the component name",
+  "Changes": [
+    {
+      "Action": "UPSERT",
+      "ResourceRecordSet": {
+        "Name": "DNS_NAME",
+        "Type": "A",
+        "TTL": 10,
+        "ResourceRecords": [
+          {
+            "Value": "IP_ADDRESS"
+          }
+        ]
+      }
+    }
+  ]
+}

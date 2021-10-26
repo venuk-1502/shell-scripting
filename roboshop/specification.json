@@ -1,6 +1,5 @@
 {
   "ImageId": "ami-0e4e4b2f188e91845",
   "SecurityGroupIds": [ "sg-0ec7a1055abb5cf0c" ],
-  "InstanceType": "t2.micro",
-  "Tags": [{"Key": "Name", "Value": "Cart"}]
+  "InstanceType": "t2.micro"
 }
