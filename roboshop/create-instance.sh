@@ -12,6 +12,7 @@ if [ -z $1 ]; then
   echo "No input entered for instance name(Name tag)"
   echo "Script Usage: # sh $0 INSTANCE_NAME"
   exit 1
+fi
 instance_count=$(aws ec2 describe-instances --filters  "Name=tag:Name,Values=$1" | jq ".Reservations[].Instances[].PrivateIpAddress" | grep -v null  | wc -l)
 if [ $instance_count -eq 0 ]; then
   request_id=$(aws ec2 request-spot-instances --spot-price "0.0036" --instance-count 1 --type "persistent" --launch-specification file://specification.json | jq -r ".SpotInstanceRequests[].SpotInstanceRequestId")
