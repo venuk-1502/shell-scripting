@@ -5,7 +5,7 @@
 #--tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=$1}]'
 #sed -s ""
 aws ec2 request-spot-instances --spot-price "0.0036" --instance-count 1 --type "persistent"  \
---tag-specifications 'ResourceType=spot-instances-request,Tags=[{Key=Name,Value=$1}]' --launch-specification file://specification.json | jq
+--launch-specification file://specification.json | jq
 
 #--launch-specification file://specification.json
 
