@@ -18,7 +18,7 @@ if [ $instance_count -eq 0 ]; then
   request_id=$(aws ec2 request-spot-instances --spot-price "0.0036" --instance-count 1 --type "persistent" --instance-interruption-behavior "stop" --launch-specification file://specification.json | jq -r ".SpotInstanceRequests[].SpotInstanceRequestId")
   echo "SPOT Instance Request Created: $request_id"
   echo "Sleeping 1 minute for instance to be created"
-  sleep 20
+  sleep 30
   instance_id=$(aws ec2 describe-spot-instance-requests --query "SpotInstanceRequests[?SpotInstanceRequestId=='${request_id}'].InstanceId|[0]"|xargs)
   echo "SPOT Instance Has Been Created: $instance_id"
 
